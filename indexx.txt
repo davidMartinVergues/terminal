@@ -1,0 +1,10 @@
+2.wildcards
+├── abc
+├── datos1
+├── datos2
+├── dot2.txt
+├── dot.txt
+├── file.txt
+└── index.html
+
+0 directories, 7 files
