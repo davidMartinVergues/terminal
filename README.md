@@ -656,6 +656,6 @@ si lo queramos instalar manuealmente.
 
 Cuando los descomprimamos tendremos:
 
-![not found](img/8.png)
+![not found](./img/8.png)
 
 Este árbol de directorios simula el que tenemos en local `/usr/...` así que lo único que debemos hacer es copiar cada una de esas carpetas donde corresponda en local.
