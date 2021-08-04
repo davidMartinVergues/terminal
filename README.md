@@ -1,3 +1,28 @@
+- [La terminal de Linux](#la-terminal-de-linux)
+  - [Sistema de archivos linux](#sistema-de-archivos-linux)
+  - [Manipulando archivo y directorios](#manipulando-archivo-y-directorios)
+  - [Explorando el contenido de archivos](#explorando-el-contenido-de-archivos)
+  - [Que es un comando](#que-es-un-comando)
+  - [WildCards](#wildcards)
+  - [Redirecciones](#redirecciones)
+    - [stdin stdout stderr](#stdin-stdout-stderr)
+    - [Pipe operator](#pipe-operator)
+    - [Encadenando comandos : opeardores de control](#encadenando-comandos--opeardores-de-control)
+- [Permisos](#permisos)
+  - [Modificar los permisos](#modificar-los-permisos)
+- [Variables de entorno](#variables-de-entorno)
+- [Comandos de búsqueda](#comandos-de-búsqueda)
+- [Comando grep](#comando-grep)
+- [Utilidades de red](#utilidades-de-red)
+- [comprimiendo archivos](#comprimiendo-archivos)
+  - [TAR](#tar)
+  - [ZIP](#zip)
+- [Manejo de procesos](#manejo-de-procesos)
+  - [procesos en background y foreground](#procesos-en-background-y-foreground)
+- [Editores de texto en la terminal](#editores-de-texto-en-la-terminal)
+- [Ejecutar scripts con supervisor](#ejecutar-scripts-con-supervisor)
+- [Instalar programas Linux cuando nos bajamos un rpm](#instalar-programas-linux-cuando-nos-bajamos-un-rpm)
+
 # La terminal de Linux
 
 La terminal es interfaz gráfica que alberga la línea de comandos o shell. El shell es un programa que toma comandos y os pasa al SO para realizar una función.
@@ -559,3 +584,78 @@ vim # entra en el editor
 ```
 
 para salir solo hay q presionar `:q`
+
+# Ejecutar scripts con supervisor
+
+Supervisor es una herramienta linux que nos permite gestionar los diferentes procesos de nuestro sistema. Por ejemplo nos permite mantener un prorama en constante ejecución.
+Es perfecto cuando desplegamos una WebApp.
+
+Creamos un script, lo haremos en python main.py
+
+```python
+import time
+import datetime
+
+while True:
+  now = datetime.datetime.now()
+  print(now.strftime(%b %d %Y %H:%M:%S))
+  time.sleep(10)
+
+```
+
+Instalamos supervisor como paquete del sistema
+
+```
+sudo apt install supervisor
+```
+
+supervisor es un servicio en el sistema así que para gestionar ese servicio usaremos la suit systemd.
+
+Configuramos para que el sistema arranque supervisor con cada reinicio del SO
+
+```
+sudo systemctl enable supervisor
+sudo systemctl restart supervisor
+```
+
+Creamos el servicio en supervisor
+
+```
+sudo nano /etc/supervisor/conf.d/nombreDelServicio.conf
+```
+
+Dentro escribimos:
+
+```
+[program:nombreDelServicio]
+command=python3 /home/user/main.py
+autostart=true
+autorestart=true
+stderr_logfile=/home/user/nombreDelServicio.error.log
+stdout_logfile=/home/user/nombreDelServicio.out.log
+environment=PYTHONUNBUFFERED=1 # python no imprime nada si no tiene un salto de línea con esta línea eliminamos esa restricción
+```
+
+Una vez hecho esto tenemos que notificar a supervisor que existen cambios en la ruta conf.d para ello `sudo supervisorctl reread` y agregamos nuestro servicio/proceso a la lista de supervisor hacemos `sudo supervisorctl update`
+Para ver el estado de los servicios que gestiona supervisor hacemos `spervisorctl status`
+
+Si modificara el archivo de conf de mi servicio debo repetir los pasos de reread y update.
+
+Para finalizar los procesos `sudo supervisorctl stop nombreDelServicio`
+
+# Instalar programas Linux cuando nos bajamos un rpm
+
+Puede que nos bajems el rpm
+
+```
+sudo rpm -ivh dbeaver-<version>.rpm
+
+```
+
+si lo queramos instalar manuealmente.
+
+Cuando los descomprimamos tendremos:
+
+![not found](img/8.png)
+
+Este árbol de directorios simula el que tenemos en local `/usr/...` así que lo único que debemos hacer es copiar cada una de esas carpetas donde corresponda en local.
