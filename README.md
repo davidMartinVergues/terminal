@@ -23,6 +23,7 @@
 - [Ejecutar scripts con supervisor](#ejecutar-scripts-con-supervisor)
 - [Instalar programas Linux cuando nos bajamos un rpm](#instalar-programas-linux-cuando-nos-bajamos-un-rpm)
 - [INSTALAR MariaDB](#instalar-mariadb)
+- [Customizando la terminal](#customizando-la-terminal)
 
 # La terminal de Linux
 
@@ -678,3 +679,13 @@ Once the key is imported and the repository added you can install MariaDB 10.6 f
 
 1. sudo apt update
 2. sudo apt install mariadb-server
+
+# Customizando la terminal
+
+Para refrescar el archvo de configuración de zsh
+
+```
+source ~/.zshrc
+```
+
+para customizar el tema de mi zsh, poerlevel10k, abrimos en vscode su archivo de configuración `~/.p10k.zsh`
