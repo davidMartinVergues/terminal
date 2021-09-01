@@ -684,6 +684,52 @@ Once the key is imported and the repository added you can install MariaDB 10.6 f
 
 Para refrescar el archvo de configuración de zsh
 
+para que zsh reconozco el comando conda copiamos en el archivo `.zshrc`
+
+```bash
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/david/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/david/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/david/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/david/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+export PYTHONPATH=/home/david/anaconda3/bin/python
+```
+
+y para que zsh con oh my zsh reconozco el venv y lo ponga en el prompt retocamos el archivo `.p10k.zsh`
+
+```bash
+# Prompt colors.
+local green='#2ECC40'
+
+# Left prompt segments.
+typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+
+  anaconda                  # anaconda venv
+  virtualenv                # python virtual environment
+  context                   # user@host
+  dir                       # current directory
+  vcs                       # git status
+  #command_execution_time    # previous command duration
+  prompt_char               # prompt symbol
+)
+
+# setting for anaconda prompt
+typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=$green
+typeset -g POWERLEVEL9K_ANACONDA_SHOW_PYTHON_VERSION=true
+
+```
+
+actualizamos la confi de zsh con:
+
 ```
 source ~/.zshrc
 ```
