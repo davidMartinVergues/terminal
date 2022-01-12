@@ -81,6 +81,7 @@ tree -L 2 => muestra archivos hasta 2 niveles de profundida
   - rm -i file1 (antes de borrar nos lo pregunta y | n)
   - rm -r dir1 (-recursiva es para borrar directorios con contenido)
   - rm -rf dir1 (-recursivo -force)
+  
 
 ## Explorando el contenido de archivos
 
@@ -321,6 +322,12 @@ Las cofiguraciones de nuestro bash se guardan en el archivo `.bashrc` de nuestro
 ```bash
 
 PATH=$PATH:/home/david/paquete/bin
+```
+
+o bien
+
+```
+export PATH=/home/<user_name>/.local/bin:$PATH
 ```
 
 una vez hecho esto debemos volver a ejecutar la terminal
@@ -734,4 +741,4 @@ actualizamos la confi de zsh con:
 source ~/.zshrc
 ```
 
-para customizar el tema de mi zsh, poerlevel10k, abrimos en vscode su archivo de configuración `~/.p10k.zsh`
+para customizar el tema de mi zsh, powerlevel10k, abrimos en vscode su archivo de configuración `~/.p10k.zsh`
